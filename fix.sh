@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get remove -y docker-ce docker-engine docker.io containerd runc
 cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
 overlay
 br_netfilter
@@ -25,3 +25,4 @@ sed -e 's/SystemdCgroup = false/SystemdCgroup = true/g' -i /etc/containerd/confi
 systemctl daemon-reload
 systemctl restart containerd
 systemctl restart kubelet
+echo " reload completed, please verify"
